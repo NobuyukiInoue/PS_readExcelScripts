@@ -29,14 +29,14 @@ function readTextRangeText($T_WB, $i_WS)
 {
     $resultStr = ""
     for (${i} = 1; ${i} -le ${T_WB}.WorkSheets.item(${i_WS}).Shapes.Count; ${i}++) {
-        # $resultStr += "`t" + ${i} + ":" + ${T_WB}.WorkSheets.item(${i_WS}).Shapes(${i}).Name
+        # $resultStr += "`t" + ${i} + ":" + ${T_WB}.WorkSheets.item(${i_WS}).Shapes(${i}).Name + "`n"
 
         if (${T_WB}.WorkSheets.item(${i_WS}).Shapes(${i}).TextFrame2 -ne $NULL) {
             if ($T_WB.WorkSheets.item($i_WS).Shapes(${i}).TextFrame2.TextRange.Text -ne $NULL) {
                 $ShapeName = ${T_WB}.WorkSheets.item(${i_WS}).Shapes(${i}).Name
                 $ShapeText = $T_WB.WorkSheets.item($i_WS).Shapes(${i}).TextFrame2.TextRange.Text
                 $ShapeText = $ShapeText.Replace("`n", "`t")
-                $resultStr += "`t" + ${ShapeName} + ":`t" + ${ShapeText}
+                $resultStr += "`t" + ${ShapeName} + ":`t" + ${ShapeText} + "`n"
             }
         }
     }
