@@ -67,14 +67,14 @@ function Pause
 function Main([string]$Path, [string]$Pattern, [string]$Exclude, [int]$Depth) {
     $list = Get-ChildItem -Recurse -Path $Path -Filter $Pattern -Depth $Depth | ForEach {$_.FullName}
 
+    # Excelオブジェクトを取得
+    $excel = New-Object -ComObject Excel.Application
+
+    # 表示を有効化
+    $excel.Visible = $TRUE
+
     foreach ($fname in $list) {
         Write-Output $fname
-
-        # Excelオブジェクトを取得
-        $excel = New-Object -ComObject Excel.Application
-
-        # 表示を有効化
-        $excel.Visible = $TRUE
 
         # 既存のExcelファイルを読み取り専用で開く
         $T_WB = $excel.Workbooks.Open($fname, $FALSE, $TRUE)
@@ -87,8 +87,8 @@ function Main([string]$Path, [string]$Pattern, [string]$Exclude, [int]$Depth) {
         }
 
         $T_WB.Close($FALSE)
-        $excel.Quit()
     }
+    $excel.Quit()
 }
 
 
