@@ -69,7 +69,7 @@ function readCells($T_WB, [int]$SheetNum, [string]$T_Address, [int]$row, [int]$c
     for ($j = 0; $j -lt $count; $j++) {
         $val = $T_WB.worksheets.item($SheetNum).Range($T_Address).Cells($row, $j).text
         $val = $val.Replace("`n", "")
-        $resultStr += "`t" + $val
+        $resultStr += [String]::Format("{0,-15}", $val)
     }
     
     Write-Output $resultStr
